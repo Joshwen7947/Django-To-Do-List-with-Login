@@ -1,9 +1,11 @@
+{%extends "base/main.html"%} {% block content%} 
+
+
 {% if request.user.is_authenticated%}
 <p>{{request.user}}</p>
 <a href="{% url 'logout'%}">Logout</a>
 {%else%}
 <a href="{% url 'login'%}">Login</a>
-
 {%endif%}
 <hr />
 
@@ -25,7 +27,9 @@
 	{% for task in tasks%}
 	<tr>
 		<td>{{task.title}}</td>
+		{% comment %}
 		<td><a href="{% url 'task' task.id %}">View</a></td>
+		{% endcomment %}
 		<td><a href="{% url 'task-update' task.id %}">Edit</a></td>
 		<td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
 	</tr>
@@ -33,3 +37,5 @@
 	<h3>No Items in list</h3>
 	{% endfor %}
 </table>
+
+{%endblock content%}
